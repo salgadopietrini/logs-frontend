@@ -1,5 +1,7 @@
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
+import Form from "../components/Form/Form";
+import Greeting from "../components/Greeting/Greeting";
 
 const GET_LOCATIONS = gql`
   query GetLocations {
@@ -18,7 +20,7 @@ function Home() {
 
   return (
     <div>
-      <h2>My first Apollo app 🚀</h2>
+      <Form />
     </div>
   );
 }
