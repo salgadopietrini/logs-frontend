@@ -1,7 +1,23 @@
-import React from 'react';
+import React from "react";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  gql,
+} from "@apollo/client";
+import Home from "./views/Home";
+
+const client = new ApolloClient({
+  uri: "https://flyby-gateway.herokuapp.com/",
+  cache: new InMemoryCache(),
+});
 
 function App() {
-  return <div>Hello world</div>;
+  return (
+    <ApolloProvider client={client}>
+      <Home />
+    </ApolloProvider>
+  );
 }
 
 export default App;
