@@ -1,14 +1,27 @@
 import { styled } from "@mui/system";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 
 export const StyledContainer = styled("div")({
   display: "flex",
   height: "100vh",
   alignItems: "center",
-  justifyContent: "center",
+  justifyContent: "space-around",
+  "@media (max-width: 1080px)": {
+    flexDirection: "column",
+    justifyContent: "center",
+  },
 });
-
-export const StyledStack = styled(Stack)({
-  width: "80%",
+export const StyledLeftContainer = styled("div")({
+  width: "30%",
+  "@media (max-width: 1080px)": {
+    width: "80%",
+  },
+});
+export const StyledRightContainer = styled("div")({
+  width: "50%",
+  "@media (max-width: 1300px)": {
+    width: "60%",
+  },
+  "@media (max-width: 1080px)": {
+    width: "80%",
+  },
 });

@@ -59,7 +59,7 @@ function Form() {
         surname: { ...state.surname, status: true },
       }));
     }
-    if (!isAlpha(surname)) {
+    if (!isAlpha(country)) {
       setErrors((state) => ({
         ...state,
         country: { ...state.country, status: true },

@@ -1,10 +1,14 @@
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
-import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
 import Form from "../../components/Form/Form";
 import Greeting from "../../components/Greeting/Greeting";
 import List from "../../components/List/List";
-import { StyledContainer, StyledStack } from "./home.styles";
+import {
+  StyledContainer,
+  StyledLeftContainer,
+  StyledRightContainer,
+} from "./home.styles";
 
 const GET_LOCATIONS = gql`
   query GetLocations {
@@ -22,17 +26,15 @@ function Home() {
 
   return (
     <StyledContainer>
-      <Grid container>
-        <Grid item xs={6}>
-          <StyledStack direction="column" spacing={4}>
-            <Form />
-            <Greeting />
-          </StyledStack>
-        </Grid>
-        <Grid item xs={6}>
-          <List />
-        </Grid>
-      </Grid>
+      <StyledLeftContainer>
+        <Stack direction="column" spacing={4}>
+          <Form />
+          <Greeting />
+        </Stack>
+      </StyledLeftContainer>
+      <StyledRightContainer>
+        <List />
+      </StyledRightContainer>
     </StyledContainer>
   );
 }
