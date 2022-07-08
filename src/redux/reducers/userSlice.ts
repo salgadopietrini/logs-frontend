@@ -8,8 +8,13 @@ export interface UserState {
   birthday: Date | null;
 }
 
-const initialState: UserState = {} as UserState;
-initialState.birthday = null;
+const initialState: UserState = {
+  name: "",
+  surname: "",
+  country: "",
+  birthday: null,
+};
+
 export const userSlice = createSlice({
   name: "user",
   initialState,

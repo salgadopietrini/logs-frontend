@@ -8,42 +8,11 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import { ImCancelCircle } from "react-icons/im";
-
-interface User {
-  name: string;
-  surname: string;
-  country: string;
-  birthday: Date;
-}
-
-const users: User[] = [
-  {
-    name: "Manuel",
-    surname: "Salgado",
-    country: "Venezuela",
-    birthday: new Date(1994, 10, 14),
-  },
-  {
-    name: "Hellen",
-    surname: "Torres",
-    country: "Siria",
-    birthday: new Date(1994, 5, 7),
-  },
-  {
-    name: "Alenjandro",
-    surname: "Leon",
-    country: "India",
-    birthday: new Date(1994, 8, 9),
-  },
-  {
-    name: "Rosa",
-    surname: "Martínez",
-    country: "Perú",
-    birthday: new Date(1981, 25, 3),
-  },
-];
+import { useSelector } from "react-redux";
+import type { RootState } from "../../redux/store";
 
 function List() {
+  const users = useSelector((state: RootState) => state.list);
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} size="small">
@@ -59,7 +28,7 @@ function List() {
             <TableRow key={`${elem.name}${elem.surname}`}>
               <TableCell>{`${elem.name} ${elem.surname}`}</TableCell>
               <TableCell>{elem.country}</TableCell>
-              <TableCell>{elem.birthday.getDate()}</TableCell>
+              <TableCell>{elem.birthday?.toString()}</TableCell>
               <TableCell align="center">
                 <IconButton>
                   <ImCancelCircle />

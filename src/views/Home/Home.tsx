@@ -19,7 +19,6 @@ const GET_LOCATIONS = gql`
 
 function Home() {
   const { loading, error, data } = useQuery(GET_LOCATIONS);
-  console.log({ loading, error, data });
 
   return (
     <StyledContainer>
