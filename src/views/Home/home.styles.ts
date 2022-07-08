@@ -14,6 +14,7 @@ export const StyledLeftContainer = styled("div")({
   width: "30%",
   "@media (max-width: 1080px)": {
     width: "80%",
+    marginBottom: "30px",
   },
 });
 export const StyledRightContainer = styled("div")({
