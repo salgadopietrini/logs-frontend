@@ -8,11 +8,20 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import { ImCancelCircle } from "react-icons/im";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../../redux/store";
+import { StyledTableRow } from "./list.styles";
+import { setCurrent } from "../../redux/reducers/currentSlice";
 
 function List() {
   const users = useSelector((state: RootState) => state.list);
+  const dispatch = useDispatch();
+
+  const handleButtonClick = (e: React.SyntheticEvent) => {
+    e.stopPropagation();
+    console.log("delete user");
+  };
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} size="small">
@@ -25,16 +34,19 @@ function List() {
         </TableHead>
         <TableBody>
           {users.map((elem) => (
-            <TableRow key={`${elem.name}${elem.surname}`}>
+            <StyledTableRow
+              key={`${elem.name}${elem.surname}`}
+              onClick={() => dispatch(setCurrent(elem))}
+            >
               <TableCell>{`${elem.name} ${elem.surname}`}</TableCell>
               <TableCell>{elem.country}</TableCell>
               <TableCell>{elem.birthday?.toString()}</TableCell>
               <TableCell align="center">
-                <IconButton>
+                <IconButton onClick={handleButtonClick}>
                   <ImCancelCircle />
                 </IconButton>
               </TableCell>
-            </TableRow>
+            </StyledTableRow>
           ))}
         </TableBody>
       </Table>

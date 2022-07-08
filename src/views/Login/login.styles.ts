@@ -9,7 +9,10 @@ export const StyledContainer = styled("div")({
 });
 
 export const StyledStack = styled(Stack)({
-  width: "80%",
+  width: "50%",
+  "@media (min-width: 1080px)": {
+    width: "25%",
+  },
   textAlign: "center",
 });
 
