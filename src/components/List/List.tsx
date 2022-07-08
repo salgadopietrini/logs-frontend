@@ -8,9 +8,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import { ImCancelCircle } from "react-icons/im";
+import { format } from "date-fns";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../../redux/store";
-import { StyledTableRow } from "./list.styles";
+import { StyledTableRow, StyledTableCell } from "./list.styles";
 import { setCurrent } from "../../redux/reducers/currentSlice";
 
 function List() {
@@ -27,9 +28,9 @@ function List() {
       <Table sx={{ minWidth: 650 }} size="small">
         <TableHead>
           <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell>Country</TableCell>
-            <TableCell>Birthday</TableCell>
+            <StyledTableCell>Name</StyledTableCell>
+            <StyledTableCell>Country</StyledTableCell>
+            <StyledTableCell>Birthday</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -40,7 +41,7 @@ function List() {
             >
               <TableCell>{`${elem.name} ${elem.surname}`}</TableCell>
               <TableCell>{elem.country}</TableCell>
-              <TableCell>{elem.birthday?.toString()}</TableCell>
+              <TableCell>{format(elem.birthday!, "dd/MM/yyyy")}</TableCell>
               <TableCell align="center">
                 <IconButton onClick={handleButtonClick}>
                   <ImCancelCircle />

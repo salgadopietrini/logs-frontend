@@ -13,7 +13,7 @@ const initialState: UserState[] = [
     name: "Manuel",
     surname: "Salgado",
     country: "Venezuela",
-    birthday: new Date(1994, 10, 14),
+    birthday: new Date(1994, 6, 8),
   },
   {
     name: "Hellen",

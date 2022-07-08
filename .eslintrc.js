@@ -46,6 +46,7 @@ module.exports = {
       },
     ],
     "react/jsx-props-no-spreading": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
   },
   settings: {
     "import/resolver": {
