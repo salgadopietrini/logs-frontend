@@ -7,7 +7,7 @@ type Props = {
 
 function Layout({ children }: Props) {
   return (
-    <Container maxWidth="md" disableGutters>
+    <Container maxWidth="xl" disableGutters>
       {children}
     </Container>
   );

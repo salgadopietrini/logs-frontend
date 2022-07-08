@@ -3,9 +3,6 @@ import TextField from "@mui/material/TextField";
 import { Box } from "@mui/material";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
 import MenuItem from "@mui/material/MenuItem";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
-
 import {
   StyledContainer,
   StyledStack,
@@ -22,7 +19,7 @@ function Form() {
   return (
     <Box>
       <StyledContainer>
-        <StyledStack direction="column" spacing={5}>
+        <StyledStack direction="column" spacing={2}>
           <TextField label="Name" />
           <TextField label="Surname" />
           <TextField label="Countries" select>
@@ -37,7 +34,6 @@ function Form() {
             onChange={handleChange}
             renderInput={(params) => <TextField {...params} />}
           />
-
           <StyledButtonContainer>
             <StyledButton variant="outlined">Save</StyledButton>
           </StyledButtonContainer>

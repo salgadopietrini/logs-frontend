@@ -5,8 +5,8 @@ import { Provider as ReduxProvider } from "react-redux";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { store } from "./redux/store";
-import Home from "./views/Home";
-import Login from "./views/Login";
+import Home from "./views/Home/Home";
+import Login from "./views/Login/Login";
 import NotFound from "./views/NotFound";
 import Layout from "./components/Layout/Layout";
 

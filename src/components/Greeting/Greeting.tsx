@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledPaper } from "./greeting.styles";
+import Alert from "@mui/material/Alert";
 
 interface User {
   name: string;
@@ -17,10 +17,10 @@ const user: User = {
 
 function Greeting() {
   return (
-    <StyledPaper elevation={2}>
+    <Alert severity="success" icon={false}>
       {`Hello ${user.name} from ${user.country}, on day ${user.birthday} of month ${user.birthday} you
-      will have ${user.birthday} years`}
-    </StyledPaper>
+    will have ${user.birthday} years`}
+    </Alert>
   );
 }
 
