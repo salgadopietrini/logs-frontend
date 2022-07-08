@@ -21,25 +21,25 @@ const users: User[] = [
     name: "Manuel",
     surname: "Salgado",
     country: "Venezuela",
-    birthday: new Date("14/10/1994"),
+    birthday: new Date(1994, 10, 14),
   },
   {
     name: "Hellen",
     surname: "Torres",
     country: "Siria",
-    birthday: new Date("05/07/1994"),
+    birthday: new Date(1994, 5, 7),
   },
   {
     name: "Alenjandro",
     surname: "Leon",
     country: "India",
-    birthday: new Date("08/01/1995"),
+    birthday: new Date(1994, 8, 9),
   },
   {
     name: "Rosa",
     surname: "Martínez",
     country: "Perú",
-    birthday: new Date("25/03/1981"),
+    birthday: new Date(1981, 25, 3),
   },
 ];
 
