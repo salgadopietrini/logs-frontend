@@ -1,6 +1,7 @@
 import React from "react";
-import { useQuery, gql } from "@apollo/client";
 import Stack from "@mui/material/Stack";
+import CircularProgress from "@mui/material/CircularProgress";
+import { GET_USERS, useQuery, UserData } from "../../apollo/queries";
 import Form from "../../components/Form/Form";
 import Greeting from "../../components/Greeting/Greeting";
 import List from "../../components/List/List";
@@ -10,19 +11,8 @@ import {
   StyledRightContainer,
 } from "./home.styles";
 
-const GET_LOCATIONS = gql`
-  query GetLocations {
-    locations {
-      id
-      name
-      description
-      photo
-    }
-  }
-`;
-
 function Home() {
-  const { loading, error, data } = useQuery(GET_LOCATIONS);
+  const { loading, data } = useQuery<UserData>(GET_USERS);
 
   return (
     <StyledContainer>
@@ -33,7 +23,7 @@ function Home() {
         </Stack>
       </StyledLeftContainer>
       <StyledRightContainer>
-        <List />
+        {loading ? <CircularProgress /> : <List users={data!.users} />}
       </StyledRightContainer>
     </StyledContainer>
   );

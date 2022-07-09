@@ -8,19 +8,25 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import { ImCancelCircle } from "react-icons/im";
-import { format } from "date-fns";
-import { useSelector, useDispatch } from "react-redux";
-import type { RootState } from "../../redux/store";
+import { useDispatch } from "react-redux";
+import { DELETE_USER, useMutation } from "../../apollo/mutations";
+import { GET_USERS, User } from "../../apollo/queries";
 import { StyledTableRow, StyledTableCell } from "./list.styles";
 import { setCurrent } from "../../redux/reducers/currentSlice";
 
-function List() {
-  const users = useSelector((state: RootState) => state.list);
+interface Props {
+  users: User[];
+}
+
+function List({ users }: Props) {
+  const [deleteUser] = useMutation(DELETE_USER, {
+    refetchQueries: [{ query: GET_USERS }, "GetUsers"],
+  });
   const dispatch = useDispatch();
 
-  const handleButtonClick = (e: React.SyntheticEvent) => {
+  const handleButtonClick = (e: React.SyntheticEvent, id: string) => {
     e.stopPropagation();
-    console.log("delete user");
+    deleteUser({ variables: { deleteUserId: id } });
   };
 
   return (
@@ -34,16 +40,16 @@ function List() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {users.map((elem) => (
+          {users.map((elem: User) => (
             <StyledTableRow
-              key={`${elem.name}${elem.surname}`}
-              onClick={() => dispatch(setCurrent(elem))}
+              key={elem.id}
+              /* onClick={() => dispatch(setCurrent(elem))} */
             >
               <TableCell>{`${elem.name} ${elem.surname}`}</TableCell>
               <TableCell>{elem.country}</TableCell>
-              <TableCell>{format(elem.birthday!, "dd/MM/yyyy")}</TableCell>
+              <TableCell>{elem.birthday}</TableCell>
               <TableCell align="center">
-                <IconButton onClick={handleButtonClick}>
+                <IconButton onClick={(e) => handleButtonClick(e, elem.id)}>
                   <ImCancelCircle />
                 </IconButton>
               </TableCell>
