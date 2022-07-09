@@ -5,6 +5,14 @@ import { DesktopDatePicker } from "@mui/x-date-pickers";
 import MenuItem from "@mui/material/MenuItem";
 import isAlpha from "validator/lib/isAlpha";
 import { useSelector, useDispatch } from "react-redux";
+import { format } from "date-fns";
+import {
+  GET_COUNTRIES,
+  GET_USERS,
+  useQuery,
+  CountryData,
+} from "../../apollo/queries";
+import { CREATE_USER, useMutation } from "../../apollo/mutations";
 import type { RootState } from "../../redux/store";
 import {
   setName,
@@ -35,16 +43,20 @@ function Form() {
   const { name, surname, country, birthday } = useSelector(
     (state: RootState) => state.user
   );
+  const countries = useQuery<CountryData>(GET_COUNTRIES);
   const dispatch = useDispatch();
-  const isDisabled =
-    name === "" || surname === "" || country === "" || birthday === null;
-
   const [errors, setErrors] = useState<Errors>({
     name: { status: false, message: "Name must be a word" },
     surname: { status: false, message: "Surname must be a word" },
     country: { status: false, message: "Country must be one of the list" },
     birthday: { status: false, message: "Birthday must be a date" },
   });
+  const [createUser] = useMutation(CREATE_USER, {
+    refetchQueries: [{ query: GET_USERS }, "GetUsers"],
+  });
+
+  const isDisabled =
+    name === "" || surname === "" || country === "" || birthday === null;
 
   const handleSave = () => {
     if (!isAlpha(name)) {
@@ -66,6 +78,15 @@ function Form() {
       }));
     }
     if (isAlpha(name) && isAlpha(surname) && isAlpha(surname)) {
+      createUser({
+        variables: {
+          name,
+          surname,
+          country,
+          birthday: format(birthday!, "dd/MM/yyyy"),
+        },
+      });
+
       dispatch(setName(""));
       dispatch(setSurname(""));
       dispatch(setCountry(""));
@@ -129,9 +150,13 @@ function Form() {
             defaultValue=""
             onChange={handleChange}
           >
-            <MenuItem value="Venezuela">Venezuela</MenuItem>
-            <MenuItem value="Portugal">Portugal</MenuItem>
-            <MenuItem value="Perú">Perú</MenuItem>
+            {countries.loading
+              ? []
+              : countries.data?.countries.map((elem) => (
+                  <MenuItem value={elem.name} key={elem.name}>
+                    {elem.name}
+                  </MenuItem>
+                ))}
           </TextField>
           <DesktopDatePicker
             label="Birthday"

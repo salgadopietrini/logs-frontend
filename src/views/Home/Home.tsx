@@ -1,7 +1,6 @@
 import React from "react";
 import Stack from "@mui/material/Stack";
-import CircularProgress from "@mui/material/CircularProgress";
-import { GET_USERS, useQuery, UserData } from "../../apollo/queries";
+import { GET_USERS, useQuery, UserData, User } from "../../apollo/queries";
 import Form from "../../components/Form/Form";
 import Greeting from "../../components/Greeting/Greeting";
 import List from "../../components/List/List";
@@ -23,7 +22,7 @@ function Home() {
         </Stack>
       </StyledLeftContainer>
       <StyledRightContainer>
-        {loading ? <CircularProgress /> : <List users={data!.users} />}
+        <List users={loading ? ([] as User[]) : data!.users} />
       </StyledRightContainer>
     </StyledContainer>
   );

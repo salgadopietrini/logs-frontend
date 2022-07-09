@@ -8,7 +8,7 @@ export interface User {
   birthday: string;
 }
 
-interface UserData {
+export interface UserData {
   users: User[];
 }
 
@@ -24,6 +24,14 @@ export const GET_USERS = gql`
   }
 `;
 
+export interface Country {
+  name: string;
+}
+
+export interface CountryData {
+  countries: Country[];
+}
+
 export const GET_COUNTRIES = gql`
   query GetCountries {
     countries {
@@ -32,4 +40,4 @@ export const GET_COUNTRIES = gql`
   }
 `;
 
-export { useQuery, UserData };
+export { useQuery };

@@ -18,7 +18,12 @@ export const CREATE_USER = gql`
       surname: $surname
       country: $country
       birthday: $birthday
-    )
+    ) {
+      name
+      surname
+      country
+      birthday
+    }
   }
 `;
 
