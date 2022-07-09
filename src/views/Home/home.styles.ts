@@ -16,15 +16,16 @@ export const StyledContainer = styled("div")({
 
 export const StyledLeftContainer = styled("div")({
   width: "30%",
-  alignSelf: "center",
+  paddingTop: "28vh",
   "@media (max-width: 1080px)": {
+    paddingTop: "0",
     width: "80%",
     marginBottom: "30px",
   },
 });
 
 export const StyledRightContainer = styled("div")({
-  paddingTop: "250px",
+  paddingTop: "28vh",
   width: "50%",
   "@media (max-width: 1300px)": {
     width: "60%",

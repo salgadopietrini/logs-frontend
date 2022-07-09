@@ -14,9 +14,10 @@ export const currentSlice = createSlice({
       defined: true,
       ...action.payload,
     }),
+    resetCurrent: () => initialState,
   },
 });
 
-export const { setCurrent } = currentSlice.actions;
+export const { setCurrent, resetCurrent } = currentSlice.actions;
 
 export default currentSlice.reducer;

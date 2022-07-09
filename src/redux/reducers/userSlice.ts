@@ -25,10 +25,11 @@ export const userSlice = createSlice({
     setBirthday: (state, action: PayloadAction<Date | null>) => {
       state.birthday = action.payload;
     },
+    resetForm: () => initialState,
   },
 });
 
-export const { setName, setSurname, setCountry, setBirthday } =
+export const { setName, setSurname, setCountry, setBirthday, resetForm } =
   userSlice.actions;
 
 export default userSlice.reducer;

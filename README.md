@@ -44,3 +44,9 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+Cosas a mejorar:
+
+-Utilizar update de la cache en graphql para las mutaciones
+-No utilizar redux en el form, ya que cada keystroke dispara una actualización del estado. Esto es innecesario, se pueden usar uncontrolled inputs, pero se ha usado redux a fin de demostrar el manejo de la herramienta.
+-Utilizar un uncontrolled inputs también permitiría usar una librería de validación de los mismos, fomo formik.

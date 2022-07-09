@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux";
 import { DELETE_USER, useMutation } from "../../apollo/mutations";
 import { GET_USERS } from "../../apollo/queries";
 import { StyledTableRow, StyledTableCell } from "./list.styles";
-import { setCurrent } from "../../redux/reducers/currentSlice";
+import { setCurrent, resetCurrent } from "../../redux/reducers/currentSlice";
 import { ListProps, UserQuery } from "../../utils/types";
 import { getDateFromString } from "../../utils/actions";
 
@@ -22,9 +22,24 @@ function List({ users }: ListProps) {
   });
   const dispatch = useDispatch();
 
-  const handleButtonClick = (e: React.SyntheticEvent, id: string) => {
+  const handleDeleteButtonClick = async (
+    e: React.SyntheticEvent,
+    id: string
+  ) => {
     e.stopPropagation();
-    deleteUser({ variables: { deleteUserId: id } });
+    await deleteUser({ variables: { deleteUserId: id } });
+    dispatch(resetCurrent());
+  };
+
+  const handleRowClick = (user: UserQuery) => {
+    dispatch(
+      setCurrent({
+        name: user.name,
+        surname: user.surname,
+        country: user.country,
+        birthday: getDateFromString(user.birthday!),
+      })
+    );
   };
 
   return (
@@ -45,24 +60,14 @@ function List({ users }: ListProps) {
         </TableHead>
         <TableBody>
           {users.map((elem: UserQuery) => (
-            <StyledTableRow
-              key={elem.id}
-              onClick={() => {
-                dispatch(
-                  setCurrent({
-                    name: elem.name,
-                    surname: elem.surname,
-                    country: elem.country,
-                    birthday: getDateFromString(elem.birthday!),
-                  })
-                );
-              }}
-            >
+            <StyledTableRow key={elem.id} onClick={() => handleRowClick(elem)}>
               <TableCell>{`${elem.name} ${elem.surname}`}</TableCell>
               <TableCell>{elem.country}</TableCell>
               <TableCell>{elem.birthday}</TableCell>
               <TableCell align="center">
-                <IconButton onClick={(e) => handleButtonClick(e, elem.id)}>
+                <IconButton
+                  onClick={(e) => handleDeleteButtonClick(e, elem.id)}
+                >
                   <ImCancelCircle />
                 </IconButton>
               </TableCell>

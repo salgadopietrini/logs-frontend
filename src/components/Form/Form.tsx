@@ -13,6 +13,7 @@ import {
   setSurname,
   setCountry,
   setBirthday,
+  resetForm,
 } from "../../redux/reducers/userSlice";
 import { setCurrent } from "../../redux/reducers/currentSlice";
 import {
@@ -44,7 +45,7 @@ function Form() {
     refetchQueries: [{ query: GET_USERS }, "GetUsers"],
   });
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!isAlpha(name)) {
       setErrors((state) => ({
         ...state,
@@ -64,7 +65,7 @@ function Form() {
       }));
     }
     if (isAlpha(name) && isAlpha(surname) && isAlpha(surname)) {
-      createUser({
+      await createUser({
         variables: {
           name,
           surname,
@@ -72,6 +73,7 @@ function Form() {
           birthday: format(birthday!, "dd/MM/yyyy"),
         },
       });
+
       dispatch(
         setCurrent({
           name,
@@ -80,10 +82,7 @@ function Form() {
           birthday,
         })
       );
-      dispatch(setName(""));
-      dispatch(setSurname(""));
-      dispatch(setCountry(""));
-      dispatch(setBirthday(null));
+      dispatch(resetForm());
     }
   };
 
