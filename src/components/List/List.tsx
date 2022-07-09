@@ -10,15 +10,13 @@ import IconButton from "@mui/material/IconButton";
 import { ImCancelCircle } from "react-icons/im";
 import { useDispatch } from "react-redux";
 import { DELETE_USER, useMutation } from "../../apollo/mutations";
-import { GET_USERS, User } from "../../apollo/queries";
+import { GET_USERS } from "../../apollo/queries";
 import { StyledTableRow, StyledTableCell } from "./list.styles";
 import { setCurrent } from "../../redux/reducers/currentSlice";
+import { ListProps, UserQuery } from "../../utils/types";
+import { getDateFromString } from "../../utils/actions";
 
-interface Props {
-  users: User[];
-}
-
-function List({ users }: Props) {
+function List({ users }: ListProps) {
   const [deleteUser] = useMutation(DELETE_USER, {
     refetchQueries: [{ query: GET_USERS }, "GetUsers"],
   });
@@ -30,31 +28,32 @@ function List({ users }: Props) {
   };
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} size="small">
+    <TableContainer
+      component={Paper}
+      sx={{
+        maxHeight: 450,
+      }}
+    >
+      <Table sx={{ minWidth: 50 }} size="small" stickyHeader>
         <TableHead>
           <TableRow>
             <StyledTableCell>Name</StyledTableCell>
             <StyledTableCell>Country</StyledTableCell>
             <StyledTableCell>Birthday</StyledTableCell>
+            <StyledTableCell> </StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {users.map((elem: User) => (
+          {users.map((elem: UserQuery) => (
             <StyledTableRow
               key={elem.id}
               onClick={() => {
-                const dateParts = elem.birthday.split("/");
                 dispatch(
                   setCurrent({
                     name: elem.name,
                     surname: elem.surname,
                     country: elem.country,
-                    birthday: new Date(
-                      +dateParts[2],
-                      +dateParts[1] - 1,
-                      +dateParts[0]
-                    ),
+                    birthday: getDateFromString(elem.birthday!),
                   })
                 );
               }}

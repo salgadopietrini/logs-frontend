@@ -1,12 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-
-export interface UserState {
-  name: string;
-  surname: string;
-  country: string;
-  birthday: Date | null;
-}
+import { UserState } from "../../utils/types";
 
 const initialState: UserState = {
   name: "",

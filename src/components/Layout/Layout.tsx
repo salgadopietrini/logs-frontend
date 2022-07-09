@@ -1,11 +1,8 @@
+import React from "react";
 import { Container } from "@mui/material";
-import React, { ReactNode } from "react";
+import { LayoutProps } from "../../utils/types";
 
-type Props = {
-  children: ReactNode;
-};
-
-function Layout({ children }: Props) {
+function Layout({ children }: LayoutProps) {
   return (
     <Container maxWidth="xl" disableGutters>
       {children}

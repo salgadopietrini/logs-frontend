@@ -3,10 +3,12 @@ import { styled } from "@mui/system";
 export const StyledContainer = styled("div")({
   display: "flex",
   height: "100vh",
-
   justifyContent: "space-around",
   "@media (max-width: 1080px)": {
     alignItems: "center",
+    marginTop: "50px",
+    marginBottom: "50px",
+    height: "100%",
     flexDirection: "column",
     justifyContent: "center",
   },

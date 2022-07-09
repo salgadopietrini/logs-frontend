@@ -6,14 +6,8 @@ import MenuItem from "@mui/material/MenuItem";
 import isAlpha from "validator/lib/isAlpha";
 import { useSelector, useDispatch } from "react-redux";
 import { format } from "date-fns";
-import {
-  GET_COUNTRIES,
-  GET_USERS,
-  useQuery,
-  CountryData,
-} from "../../apollo/queries";
+import { GET_COUNTRIES, GET_USERS, useQuery } from "../../apollo/queries";
 import { CREATE_USER, useMutation } from "../../apollo/mutations";
-import type { RootState } from "../../redux/store";
 import {
   setName,
   setSurname,
@@ -27,18 +21,12 @@ import {
   StyledButtonContainer,
   StyledButton,
 } from "./form.styles";
-
-interface Error {
-  status: boolean;
-  message: string;
-}
-
-interface Errors {
-  name: Error;
-  surname: Error;
-  country: Error;
-  birthday: Error;
-}
+import {
+  UserValidationErrors,
+  RootState,
+  CountryData,
+} from "../../utils/types";
+import { validateFilledForm } from "../../utils/actions";
 
 function Form() {
   const { name, surname, country, birthday } = useSelector(
@@ -46,7 +34,7 @@ function Form() {
   );
   const countries = useQuery<CountryData>(GET_COUNTRIES);
   const dispatch = useDispatch();
-  const [errors, setErrors] = useState<Errors>({
+  const [errors, setErrors] = useState<UserValidationErrors>({
     name: { status: false, message: "Name must be a word" },
     surname: { status: false, message: "Surname must be a word" },
     country: { status: false, message: "Country must be one of the list" },
@@ -55,9 +43,6 @@ function Form() {
   const [createUser] = useMutation(CREATE_USER, {
     refetchQueries: [{ query: GET_USERS }, "GetUsers"],
   });
-
-  const isDisabled =
-    name === "" || surname === "" || country === "" || birthday === null;
 
   const handleSave = () => {
     if (!isAlpha(name)) {
@@ -106,7 +91,7 @@ function Form() {
     setErrors((state) => ({
       ...state,
       [e.target.name]: {
-        ...state[e.target.name as keyof Errors],
+        ...state[e.target.name as keyof UserValidationErrors],
         status: false,
       },
     }));
@@ -186,7 +171,7 @@ function Form() {
           <StyledButtonContainer>
             <StyledButton
               variant="outlined"
-              disabled={isDisabled}
+              disabled={validateFilledForm(name, surname, country, birthday)}
               onClick={handleSave}
             >
               Save
