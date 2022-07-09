@@ -1,14 +1,15 @@
 import React from "react";
 import Alert from "@mui/material/Alert";
 import { format } from "date-fns";
-import { useSelector } from "react-redux";
-import type { RootState } from "../../redux/store";
+import { UserState } from "../../redux/reducers/currentSlice";
 import { getYearsAtNextBirthday } from "../../utils/getYearsAtNextBirthday";
 
-function Greeting() {
-  const { name, country, birthday } = useSelector(
-    (state: RootState) => state.current
-  );
+interface Props {
+  data: UserState;
+}
+
+function Greeting({ data }: Props) {
+  const { name, country, birthday } = data;
   const years = getYearsAtNextBirthday(birthday!);
   return (
     <Alert severity="success" icon={false}>

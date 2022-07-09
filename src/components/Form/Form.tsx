@@ -20,6 +20,7 @@ import {
   setCountry,
   setBirthday,
 } from "../../redux/reducers/userSlice";
+import { setCurrent } from "../../redux/reducers/currentSlice";
 import {
   StyledContainer,
   StyledStack,
@@ -86,7 +87,14 @@ function Form() {
           birthday: format(birthday!, "dd/MM/yyyy"),
         },
       });
-
+      dispatch(
+        setCurrent({
+          name,
+          surname,
+          country,
+          birthday,
+        })
+      );
       dispatch(setName(""));
       dispatch(setSurname(""));
       dispatch(setCountry(""));

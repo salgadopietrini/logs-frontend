@@ -43,7 +43,21 @@ function List({ users }: Props) {
           {users.map((elem: User) => (
             <StyledTableRow
               key={elem.id}
-              /* onClick={() => dispatch(setCurrent(elem))} */
+              onClick={() => {
+                const dateParts = elem.birthday.split("/");
+                dispatch(
+                  setCurrent({
+                    name: elem.name,
+                    surname: elem.surname,
+                    country: elem.country,
+                    birthday: new Date(
+                      +dateParts[2],
+                      +dateParts[1] - 1,
+                      +dateParts[0]
+                    ),
+                  })
+                );
+              }}
             >
               <TableCell>{`${elem.name} ${elem.surname}`}</TableCell>
               <TableCell>{elem.country}</TableCell>

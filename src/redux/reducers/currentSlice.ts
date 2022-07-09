@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface UserState {
+  defined?: boolean;
   name: string;
   surname: string;
   country: string;
@@ -9,17 +10,17 @@ export interface UserState {
 }
 
 const initialState: UserState = {
-  name: "Alenjandro",
-  surname: "Leon",
-  country: "India",
-  birthday: new Date(1994, 8, 9),
-};
+  defined: false,
+} as UserState;
 
 export const currentSlice = createSlice({
   name: "current",
   initialState,
   reducers: {
-    setCurrent: (_, action: PayloadAction<UserState>) => action.payload,
+    setCurrent: (_, action: PayloadAction<UserState>) => ({
+      defined: true,
+      ...action.payload,
+    }),
   },
 });
 
