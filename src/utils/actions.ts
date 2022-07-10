@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { Country, Languages } from "./types";
 
 export const getYearsAtNextBirthday = (birthdate: Date): number => {
   const birthYear = +format(birthdate, "yyyy");
@@ -23,9 +24,23 @@ export const getGreetingMessage = (
   name: string,
   country: string,
   birthday: Date,
-  years: number
-) =>
-  `Hello ${name} from ${country},  ${
+  years: number,
+  language: string
+): string => {
+  if (language === "pt") {
+    return `Olá ${name} de ${country},  ${
+      years > 0
+        ? `no dia ${format(birthday!, "d")} do mês ${format(
+            birthday!,
+            "M"
+          )} vais ter ${years} anos`
+        : `este dia (${format(birthday!, "d")} do mês ${format(
+            birthday!,
+            "M"
+          )}) é o teu aniversário, estás a fazer ${-years} anos, parabéns!`
+    }`;
+  }
+  return `Hello ${name} from ${country},  ${
     years > 0
       ? `on day ${format(birthday!, "d")} of month ${format(birthday!, "M")} you
 will have ${years} years`
@@ -34,6 +49,7 @@ will have ${years} years`
           "M"
         )}) is your birthday, you are now ${-years} years old, happy birthday!`
   }`;
+};
 
 export const getDateFromString = (date: string) => {
   const dateParts = date.split("/");
@@ -46,3 +62,15 @@ export const validateFilledForm = (
   country: string,
   birthday: Date | null
 ) => name === "" || surname === "" || country === "" || birthday === null;
+
+export const getCountryFromLang = (
+  countriesArr: Country[],
+  code: string,
+  language: Languages
+): string => {
+  const value = countriesArr.find((elem) => elem.code === code);
+  if (typeof value !== "undefined") {
+    return value.name[language];
+  }
+  return code;
+};

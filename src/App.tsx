@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, createContext, useMemo } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Provider as ReduxProvider } from "react-redux";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -13,23 +13,40 @@ import Login from "./views/Login/Login";
 import NotFound from "./views/NotFound";
 import Layout from "./components/Layout/Layout";
 
+interface ContextState {
+  lang: Languages;
+  handleLang: (value: Languages) => void;
+}
+
+export const Context = createContext<ContextState>({} as ContextState);
+
 function App() {
-  const [lang, setLang] = useState<Languages>("pt");
+  const [lang, setLang] = useState<Languages>("en");
+  const handleLang = (value: Languages) => {
+    setLang(value);
+  };
+
+  const value: ContextState = useMemo(
+    () => ({ lang, handleLang }),
+    [lang, handleLang]
+  );
 
   return (
     <ReduxProvider store={store}>
       <ApolloProvider client={client}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <IntlProvider locale={lang} messages={messages[lang]}>
-            <Layout setLang={setLang}>
-              <Router>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </Router>
-            </Layout>
+            <Context.Provider value={value}>
+              <Layout>
+                <Router>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </Router>
+              </Layout>
+            </Context.Provider>
           </IntlProvider>
         </LocalizationProvider>
       </ApolloProvider>

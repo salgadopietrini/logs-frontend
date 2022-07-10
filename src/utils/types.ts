@@ -1,5 +1,5 @@
 import React from "react";
-
+import { QueryResult } from "@apollo/client";
 export { RootState, AppDispatch } from "../redux/store";
 
 export type Languages = "en" | "pt";
@@ -16,8 +16,14 @@ export interface UserQueryData {
   users: UserQuery[];
 }
 
+export interface CountryName {
+  en: string;
+  pt: string;
+}
+
 export interface Country {
-  name: string;
+  name: CountryName;
+  code: string;
 }
 
 export interface CountryData {
@@ -32,16 +38,11 @@ export interface UserState {
   birthday: Date | null;
 }
 
-export interface Error {
-  status: boolean;
-  message: string;
-}
-
 export interface UserValidationErrors {
-  name: Error;
-  surname: Error;
-  country: Error;
-  birthday: Error;
+  name: boolean;
+  surname: boolean;
+  country: boolean;
+  birthday: boolean;
 }
 
 export interface GreetingProps {
@@ -50,9 +51,13 @@ export interface GreetingProps {
 
 export interface LayoutProps {
   children: React.ReactNode;
-  setLang: React.Dispatch<React.SetStateAction<Languages>>;
 }
 
 export interface ListProps {
   users: UserQuery[];
+  countries: Country[];
+}
+
+export interface FormProps {
+  countries: QueryResult;
 }

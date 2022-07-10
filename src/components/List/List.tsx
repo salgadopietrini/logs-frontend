@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useIntl } from "react-intl";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,10 +15,12 @@ import { GET_USERS } from "../../apollo/queries";
 import { StyledTableRow, StyledTableCell } from "./list.styles";
 import { setCurrent, resetCurrent } from "../../redux/reducers/currentSlice";
 import { ListProps, UserQuery } from "../../utils/types";
-import { getDateFromString } from "../../utils/actions";
+import { getDateFromString, getCountryFromLang } from "../../utils/actions";
+import { Context } from "../../App";
 
-function List({ users }: ListProps) {
+function List({ users, countries }: ListProps) {
   const intl = useIntl();
+  const { lang } = useContext(Context);
   const [deleteUser] = useMutation(DELETE_USER, {
     refetchQueries: [{ query: GET_USERS }, "GetUsers"],
   });
@@ -70,7 +72,9 @@ function List({ users }: ListProps) {
           {users.map((elem: UserQuery) => (
             <StyledTableRow key={elem.id} onClick={() => handleRowClick(elem)}>
               <TableCell>{`${elem.name} ${elem.surname}`}</TableCell>
-              <TableCell>{elem.country}</TableCell>
+              <TableCell>
+                {getCountryFromLang(countries, elem.country, lang)}
+              </TableCell>
               <TableCell>{elem.birthday}</TableCell>
               <TableCell align="center">
                 <IconButton

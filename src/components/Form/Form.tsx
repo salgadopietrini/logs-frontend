@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useIntl } from "react-intl";
 import TextField from "@mui/material/TextField";
 import { Box } from "@mui/material";
@@ -7,7 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import isAlpha from "validator/lib/isAlpha";
 import { useSelector, useDispatch } from "react-redux";
 import { format } from "date-fns";
-import { GET_COUNTRIES, GET_USERS, useQuery } from "../../apollo/queries";
+import { GET_USERS } from "../../apollo/queries";
 import { CREATE_USER, useMutation } from "../../apollo/mutations";
 import {
   setName,
@@ -26,22 +26,25 @@ import {
 import {
   UserValidationErrors,
   RootState,
-  CountryData,
+  Country,
+  FormProps,
 } from "../../utils/types";
 import { validateFilledForm } from "../../utils/actions";
+import { Context } from "../../App";
 
-function Form() {
+function Form({ countries }: FormProps) {
   const intl = useIntl();
+  const { lang } = useContext(Context);
   const { name, surname, country, birthday } = useSelector(
     (state: RootState) => state.user
   );
-  const countries = useQuery<CountryData>(GET_COUNTRIES);
+
   const dispatch = useDispatch();
   const [errors, setErrors] = useState<UserValidationErrors>({
-    name: { status: false, message: "Name must be a word" },
-    surname: { status: false, message: "Surname must be a word" },
-    country: { status: false, message: "Country must be one of the list" },
-    birthday: { status: false, message: "Birthday must be a date" },
+    name: false,
+    surname: false,
+    country: false,
+    birthday: false,
   });
   const [createUser] = useMutation(CREATE_USER, {
     refetchQueries: [{ query: GET_USERS }, "GetUsers"],
@@ -51,19 +54,19 @@ function Form() {
     if (!isAlpha(name)) {
       setErrors((state) => ({
         ...state,
-        name: { ...state.name, status: true },
+        name: true,
       }));
     }
     if (!isAlpha(surname)) {
       setErrors((state) => ({
         ...state,
-        surname: { ...state.surname, status: true },
+        surname: true,
       }));
     }
     if (!isAlpha(country)) {
       setErrors((state) => ({
         ...state,
-        country: { ...state.country, status: true },
+        country: true,
       }));
     }
     if (isAlpha(name) && isAlpha(surname) && isAlpha(surname)) {
@@ -91,10 +94,7 @@ function Form() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setErrors((state) => ({
       ...state,
-      [e.target.name]: {
-        ...state[e.target.name as keyof UserValidationErrors],
-        status: false,
-      },
+      [e.target.name]: false,
     }));
     switch (e.target.name) {
       case "name":
@@ -120,8 +120,8 @@ function Form() {
             name="name"
             value={name}
             required
-            error={errors.name.status}
-            helperText={errors.name.status ? errors.name.message : ""}
+            error={errors.name}
+            helperText={errors.name && intl.formatMessage({ id: "nameError" })}
             onChange={handleChange}
           />
           <TextField
@@ -129,8 +129,10 @@ function Form() {
             name="surname"
             value={surname}
             required
-            error={errors.surname.status}
-            helperText={errors.surname.status ? errors.surname.message : ""}
+            error={errors.surname}
+            helperText={
+              errors.surname && intl.formatMessage({ id: "surnameError" })
+            }
             onChange={handleChange}
           />
           <TextField
@@ -139,16 +141,18 @@ function Form() {
             select
             value={country}
             required
-            error={errors.country.status}
-            helperText={errors.country.status ? errors.country.message : ""}
+            error={errors.country}
+            helperText={
+              errors.country && intl.formatMessage({ id: "countryError" })
+            }
             defaultValue=""
             onChange={handleChange}
           >
             {countries.loading
               ? []
-              : countries.data?.countries.map((elem) => (
-                  <MenuItem value={elem.name} key={elem.name}>
-                    {elem.name}
+              : countries.data?.countries.map((elem: Country) => (
+                  <MenuItem value={elem.code} key={elem.code}>
+                    {elem.name[lang]}
                   </MenuItem>
                 ))}
           </TextField>
@@ -162,9 +166,9 @@ function Form() {
                 {...params}
                 name="birthday"
                 required
-                error={errors.birthday.status}
+                error={errors.birthday}
                 helperText={
-                  errors.birthday.status ? errors.birthday.message : ""
+                  errors.birthday && intl.formatMessage({ id: "birthdayError" })
                 }
               />
             )}

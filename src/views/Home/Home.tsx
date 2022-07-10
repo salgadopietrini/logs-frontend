@@ -1,11 +1,18 @@
 import React from "react";
 import Stack from "@mui/material/Stack";
 import { useSelector } from "react-redux";
-import { GET_USERS, useQuery } from "../../apollo/queries";
+import { QueryResult } from "@apollo/client";
+import { GET_USERS, GET_COUNTRIES, useQuery } from "../../apollo/queries";
 import Form from "../../components/Form/Form";
 import Greeting from "../../components/Greeting/Greeting";
 import List from "../../components/List/List";
-import { UserQueryData, UserQuery, RootState } from "../../utils/types";
+import {
+  UserQueryData,
+  UserQuery,
+  RootState,
+  CountryData,
+  Country,
+} from "../../utils/types";
 import {
   StyledContainer,
   StyledLeftContainer,
@@ -13,19 +20,29 @@ import {
 } from "./home.styles";
 
 function Home() {
-  const { loading, data } = useQuery<UserQueryData>(GET_USERS);
+  const users = useQuery<UserQueryData>(GET_USERS);
   const current = useSelector((state: RootState) => state.current);
+  const countries = useQuery<CountryData>(GET_COUNTRIES);
 
   return (
     <StyledContainer>
       <StyledLeftContainer>
         <Stack direction="column" spacing={4}>
-          <Form />
+          <Form
+            countries={
+              countries.loading ? ({ loading: true } as QueryResult) : countries
+            }
+          />
           {current.defined ? <Greeting data={current} /> : null}
         </Stack>
       </StyledLeftContainer>
       <StyledRightContainer>
-        <List users={loading ? ([] as UserQuery[]) : data!.users} />
+        <List
+          users={users.loading ? ([] as UserQuery[]) : users.data!.users}
+          countries={
+            countries.loading ? ([] as Country[]) : countries.data!.countries
+          }
+        />
       </StyledRightContainer>
     </StyledContainer>
   );

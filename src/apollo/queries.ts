@@ -15,7 +15,11 @@ export const GET_USERS = gql`
 export const GET_COUNTRIES = gql`
   query GetCountries {
     countries {
-      name
+      name {
+        en
+        pt
+      }
+      code
     }
   }
 `;
