@@ -1,5 +1,6 @@
 import React from "react";
 import { QueryResult } from "@apollo/client";
+
 export { RootState, AppDispatch } from "../redux/store";
 
 export type Languages = "en" | "pt";
@@ -30,6 +31,20 @@ export interface CountryData {
   countries: Country[];
 }
 
+export interface LogIn {
+  token: string;
+  logged: boolean;
+}
+
+export interface LogInData {
+  logIn: LogIn;
+}
+
+export interface Credentials {
+  username: string;
+  password: string;
+}
+
 export interface UserState {
   defined?: boolean;
   name: string;
@@ -49,8 +64,12 @@ export interface GreetingProps {
   data: UserState;
 }
 
-export interface LayoutProps {
+export interface ChildrenAsProps {
   children: React.ReactNode;
+}
+
+export interface LoginProps {
+  setAuth: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface ListProps {

@@ -21,8 +21,8 @@ import {
 
 function Home() {
   const users = useQuery<UserQueryData>(GET_USERS);
-  const current = useSelector((state: RootState) => state.current);
   const countries = useQuery<CountryData>(GET_COUNTRIES);
+  const current = useSelector((state: RootState) => state.current);
 
   return (
     <StyledContainer>

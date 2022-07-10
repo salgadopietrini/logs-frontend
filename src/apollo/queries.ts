@@ -1,4 +1,4 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery, useLazyQuery } from "@apollo/client";
 
 export const GET_USERS = gql`
   query GetUsers {
@@ -24,4 +24,13 @@ export const GET_COUNTRIES = gql`
   }
 `;
 
-export { useQuery };
+export const LOG_IN = gql`
+  query LogIn($username: String!, $password: String!) {
+    logIn(username: $username, password: $password) {
+      token
+      logged
+    }
+  }
+`;
+
+export { useQuery, useLazyQuery };

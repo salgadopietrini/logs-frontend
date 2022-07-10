@@ -9,6 +9,9 @@ export const messages = {
     surnameError: "Surname must be a word",
     countryError: "Country must be one of the list",
     birthdayError: "Birthday must be a date",
+    username: "Username",
+    password: "Password",
+    login: "Log in",
   },
   pt: {
     name: "Nome",
@@ -20,5 +23,8 @@ export const messages = {
     surnameError: "O apelido deve ser uma palavra",
     countryError: "O país deve ser um da lista",
     birthdayError: "Nascimento deve ser uma data",
+    username: "Usuário",
+    password: "Senha",
+    login: "Entrar",
   },
 };
