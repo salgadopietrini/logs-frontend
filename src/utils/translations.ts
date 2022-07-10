@@ -12,6 +12,7 @@ export const messages = {
     username: "Username",
     password: "Password",
     login: "Log in",
+    credits: "Made by Manuel Salgado Pietrini",
   },
   pt: {
     name: "Nome",
@@ -26,5 +27,6 @@ export const messages = {
     username: "Usuário",
     password: "Senha",
     login: "Entrar",
+    credits: "Feito por Manuel Salgado Pietrini",
   },
 };

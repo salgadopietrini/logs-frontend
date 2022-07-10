@@ -69,6 +69,7 @@ export interface ChildrenAsProps {
 }
 
 export interface LoginProps {
+  auth: boolean;
   setAuth: React.Dispatch<React.SetStateAction<boolean>>;
 }
 

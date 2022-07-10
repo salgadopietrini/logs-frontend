@@ -11,11 +11,8 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  // get the authentication token from local storage if it exists
-  /*   const token = localStorage.getItem('token'); */
-  // return the headers to the context so httpLink can read them
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibWFudWVsc2FsZ2FkbyIsInBhc3N3b3JkIjoiUHJvamVjdE1vc2FubzIwMjIifQ.H19MNlY_vcWjUn4o13qKMxawzOhb7nAVNNqPoag5hzM";
+  const token = localStorage.getItem("mosanoAppToken");
+
   return {
     headers: {
       ...headers,

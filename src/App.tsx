@@ -25,7 +25,9 @@ export const Context = createContext<ContextState>({} as ContextState);
 
 function App() {
   const [lang, setLang] = useState<Languages>("en");
-  const [auth, setAuth] = useState<boolean>(false);
+  const [auth, setAuth] = useState<boolean>(
+    localStorage.getItem("mosanoAppToken") !== null
+  );
   const handleLang = (value: Languages) => {
     setLang(value);
   };
@@ -54,7 +56,7 @@ function App() {
                     />
                     <Route
                       path="/login"
-                      element={<Login setAuth={setAuth} />}
+                      element={<Login auth={auth} setAuth={setAuth} />}
                     />
                     <Route path="*" element={<NotFound />} />
                   </Routes>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useIntl } from "react-intl";
 import TextField from "@mui/material/TextField";
@@ -12,9 +12,15 @@ import {
   StyledButton,
 } from "./login.styles";
 
-function Login({ setAuth }: LoginProps) {
+function Login({ auth, setAuth }: LoginProps) {
   const intl = useIntl();
   const navigate = useNavigate();
+  useEffect(() => {
+    if (auth) {
+      navigate("/");
+    }
+  }, []);
+
   const [credentials, setCreadentials] = useState<Credentials>(
     {} as Credentials
   );

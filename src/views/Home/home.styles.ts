@@ -2,7 +2,6 @@ import { styled } from "@mui/system";
 
 export const StyledContainer = styled("div")({
   display: "flex",
-  height: "100vh",
   justifyContent: "space-around",
   "@media (max-width: 1080px)": {
     alignItems: "center",
@@ -16,7 +15,7 @@ export const StyledContainer = styled("div")({
 
 export const StyledLeftContainer = styled("div")({
   width: "30%",
-  paddingTop: "28vh",
+  paddingTop: "22vh",
   "@media (max-width: 1080px)": {
     paddingTop: "0",
     width: "80%",
@@ -25,7 +24,7 @@ export const StyledLeftContainer = styled("div")({
 });
 
 export const StyledRightContainer = styled("div")({
-  paddingTop: "28vh",
+  paddingTop: "22vh",
   width: "50%",
   "@media (max-width: 1300px)": {
     width: "60%",
@@ -33,5 +32,6 @@ export const StyledRightContainer = styled("div")({
   "@media (max-width: 1080px)": {
     paddingTop: "0",
     width: "80%",
+    marginBottom: "30px",
   },
 });
