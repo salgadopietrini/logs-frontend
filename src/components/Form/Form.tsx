@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useIntl } from "react-intl";
 import TextField from "@mui/material/TextField";
 import { Box } from "@mui/material";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
@@ -30,6 +31,7 @@ import {
 import { validateFilledForm } from "../../utils/actions";
 
 function Form() {
+  const intl = useIntl();
   const { name, surname, country, birthday } = useSelector(
     (state: RootState) => state.user
   );
@@ -114,7 +116,7 @@ function Form() {
       <StyledContainer>
         <StyledStack direction="column" spacing={2}>
           <TextField
-            label="Name"
+            label={intl.formatMessage({ id: "name" })}
             name="name"
             value={name}
             required
@@ -123,7 +125,7 @@ function Form() {
             onChange={handleChange}
           />
           <TextField
-            label="Surname"
+            label={intl.formatMessage({ id: "surname" })}
             name="surname"
             value={surname}
             required
@@ -132,7 +134,7 @@ function Form() {
             onChange={handleChange}
           />
           <TextField
-            label="Country"
+            label={intl.formatMessage({ id: "country" })}
             name="country"
             select
             value={country}
@@ -151,7 +153,7 @@ function Form() {
                 ))}
           </TextField>
           <DesktopDatePicker
-            label="Birthday"
+            label={intl.formatMessage({ id: "birthday" })}
             inputFormat="dd/MM/yyyy"
             value={birthday}
             onChange={(e) => dispatch(setBirthday(e))}
@@ -173,7 +175,7 @@ function Form() {
               disabled={validateFilledForm(name, surname, country, birthday)}
               onClick={handleSave}
             >
-              Save
+              {intl.formatMessage({ id: "save" })}
             </StyledButton>
           </StyledButtonContainer>
         </StyledStack>

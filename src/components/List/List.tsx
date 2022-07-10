@@ -1,4 +1,5 @@
 import React from "react";
+import { useIntl } from "react-intl";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -17,6 +18,7 @@ import { ListProps, UserQuery } from "../../utils/types";
 import { getDateFromString } from "../../utils/actions";
 
 function List({ users }: ListProps) {
+  const intl = useIntl();
   const [deleteUser] = useMutation(DELETE_USER, {
     refetchQueries: [{ query: GET_USERS }, "GetUsers"],
   });
@@ -52,9 +54,15 @@ function List({ users }: ListProps) {
       <Table sx={{ minWidth: 50 }} size="small" stickyHeader>
         <TableHead>
           <TableRow>
-            <StyledTableCell>Name</StyledTableCell>
-            <StyledTableCell>Country</StyledTableCell>
-            <StyledTableCell>Birthday</StyledTableCell>
+            <StyledTableCell>
+              {intl.formatMessage({ id: "name" })}
+            </StyledTableCell>
+            <StyledTableCell>
+              {intl.formatMessage({ id: "country" })}
+            </StyledTableCell>
+            <StyledTableCell>
+              {intl.formatMessage({ id: "birthday" })}
+            </StyledTableCell>
             <StyledTableCell> </StyledTableCell>
           </TableRow>
         </TableHead>

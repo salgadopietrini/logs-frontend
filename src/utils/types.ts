@@ -2,6 +2,8 @@ import React from "react";
 
 export { RootState, AppDispatch } from "../redux/store";
 
+export type Languages = "en" | "pt";
+
 export interface UserQuery {
   id: string;
   name: string;
@@ -48,6 +50,7 @@ export interface GreetingProps {
 
 export interface LayoutProps {
   children: React.ReactNode;
+  setLang: React.Dispatch<React.SetStateAction<Languages>>;
 }
 
 export interface ListProps {
