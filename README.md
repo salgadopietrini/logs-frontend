@@ -9,7 +9,7 @@ Application developed using **React** with **TypeScript**, **GraphQl** with **Ap
 - You can also delete the users you've previously saved, deleting them from the server.
 - Use the header to change the entire lenguage of the app
 - Use the header to log out (this sends you to the login screen and deletes the token from the localStorage).
-- It implements a loading bar when you send your login information to the server, and a loading spinner once you're in the app and and the list of users and countries is being fetched from the server.
+- It implements a loading bar when you send your login information to the server, and a loading spinner once you're in the app and the list of users and countries is being fetched from the server.
 - It's fully responsive.
 
 #### Notes:
