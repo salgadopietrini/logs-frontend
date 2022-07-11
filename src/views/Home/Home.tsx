@@ -45,7 +45,12 @@ function Home() {
                     : countries
                 }
               />
-              {current.defined ? <Greeting data={current} /> : null}
+              {current.defined ? (
+                <Greeting
+                  data={current}
+                  countries={countries.data!.countries}
+                />
+              ) : null}
             </Stack>
           </StyledLeftContainer>
           <StyledRightContainer>

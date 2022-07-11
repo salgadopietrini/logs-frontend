@@ -62,6 +62,7 @@ export interface UserValidationErrors {
 
 export interface GreetingProps {
   data: UserState;
+  countries: Country[];
 }
 
 export interface ChildrenAsProps {
