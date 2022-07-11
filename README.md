@@ -25,27 +25,27 @@ Application developed using **React** with **TypeScript**, **GraphQl** with **Ap
 
 1. You must run the backend NodeJS project in your pc. The repository with the code and instructions can be found in: [Mosano-Backend](https://github.com/salgadopietrini/mosano-backend)
 
-1. Clone the repository.
+2. Clone the repository.
 
 ```
 git clone https://github.com/salgadopietrini/mosano-frontend.git
 ```
 
-2. Run `npm install` to install the node modules
+3. Run `npm install` to install the node modules
 
 ```
 npm install
 ```
 
-3. Run `npm start`. The command will start a local live server. Open (http://localhost:3000/) in your browser, if the tab doesn't open automatically.
+4. Run `npm start`. The command will start a local live server. Open (http://localhost:3000/) in your browser, if the tab doesn't open automatically.
 
 ```
 npm start
 ```
 
-4. To enter the app, you must log in using the username and password that you configured on the backend server.
+5. To enter the app, you must log in using the username and password that you configured on the backend server.
 
-5. To run the test run `npm run test`. You'll get the coverage report both in the console and as an html file in `/coverage/lcov-report/index.html`
+6. To run the test run `npm run test`. You'll get the coverage report both in the console and as an html file in `/coverage/lcov-report/index.html`
 
 ```
 npm run test
