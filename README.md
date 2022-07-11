@@ -17,9 +17,9 @@ Application developed using **React** with **TypeScript**, **GraphQl** with **Ap
 - A single unit test (for the List component) was implemented to showcase knowledge in the matter.
 - The implementation of Redux is probably unnecesary, as the same job could be done using ContextAPI and this is a simple app, but it was also done to showcase knowledge in the matter.
 
-![loggin](/assets/loggin.png)
-![logginloading](/assets/logginloading.png)
-![app](/assets/app.png)
+![loggin](/assets/logginvis.png)
+![logginloading](/assets/logginloadingvis.png)
+![app](/assets/appvis.png)
 
 ## How to use
 
