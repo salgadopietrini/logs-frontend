@@ -13,6 +13,9 @@ export const messages = {
     password: "Password",
     login: "Log in",
     credits: "Made by Manuel Salgado Pietrini",
+    notFound: "Link not found",
+    connectionError: "No connection with the server",
+    authError: "Wrong username or password",
   },
   pt: {
     name: "Nome",
@@ -28,5 +31,8 @@ export const messages = {
     password: "Senha",
     login: "Entrar",
     credits: "Feito por Manuel Salgado Pietrini",
+    notFound: "Link não encontrado",
+    connectionError: "Não há conexão com o servidor",
+    authError: "Nome de usuário ou senha incorretos",
   },
 };

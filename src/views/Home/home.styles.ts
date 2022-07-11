@@ -1,4 +1,5 @@
 import { styled } from "@mui/system";
+import Box from "@mui/material/Box";
 
 export const StyledContainer = styled("div")({
   display: "flex",
@@ -34,4 +35,8 @@ export const StyledRightContainer = styled("div")({
     width: "80%",
     marginBottom: "30px",
   },
+});
+
+export const StyledBox = styled(Box)({
+  paddingTop: "30vh",
 });

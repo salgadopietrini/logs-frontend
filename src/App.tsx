@@ -10,7 +10,7 @@ import { client, ApolloProvider } from "./apollo/config";
 import { store } from "./redux/store";
 import Home from "./views/Home/Home";
 import Login from "./views/Login/Login";
-import NotFound from "./views/NotFound";
+import NotFound from "./views/NotFound/NotFound";
 import Layout from "./components/Layout/Layout";
 import Protected from "./components/Protected/Protected";
 
