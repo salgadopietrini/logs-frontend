@@ -13,7 +13,7 @@ import {
   StyledTypography,
 } from "./layout.styles";
 import { ChildrenAsProps } from "../../utils/types";
-import { Context } from "../../App";
+import { Context } from "../../AppProvider";
 
 function Layout({ children }: ChildrenAsProps) {
   const intl = useIntl();

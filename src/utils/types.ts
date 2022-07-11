@@ -81,3 +81,10 @@ export interface ListProps {
 export interface FormProps {
   countries: QueryResult;
 }
+
+export interface ContextState {
+  lang: Languages;
+  handleLang: (value: Languages) => void;
+  auth: boolean;
+  setAuth: React.Dispatch<React.SetStateAction<boolean>>;
+}

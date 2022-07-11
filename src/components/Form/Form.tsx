@@ -30,7 +30,7 @@ import {
   FormProps,
 } from "../../utils/types";
 import { validateFilledForm } from "../../utils/actions";
-import { Context } from "../../App";
+import { Context } from "../../AppProvider";
 
 function Form({ countries }: FormProps) {
   const intl = useIntl();

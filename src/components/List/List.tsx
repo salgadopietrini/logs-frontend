@@ -16,7 +16,7 @@ import { StyledTableRow, StyledTableCell } from "./list.styles";
 import { setCurrent, resetCurrent } from "../../redux/reducers/currentSlice";
 import { ListProps, UserQuery } from "../../utils/types";
 import { getDateFromString, getCountryFromLang } from "../../utils/actions";
-import { Context } from "../../App";
+import { Context } from "../../AppProvider";
 
 function List({ users, countries }: ListProps) {
   const intl = useIntl();
@@ -70,7 +70,11 @@ function List({ users, countries }: ListProps) {
         </TableHead>
         <TableBody>
           {users.map((elem: UserQuery) => (
-            <StyledTableRow key={elem.id} onClick={() => handleRowClick(elem)}>
+            <StyledTableRow
+              key={elem.id}
+              onClick={() => handleRowClick(elem)}
+              id={elem.id}
+            >
               <TableCell>{`${elem.name} ${elem.surname}`}</TableCell>
               <TableCell>
                 {getCountryFromLang(countries, elem.country, lang)}
