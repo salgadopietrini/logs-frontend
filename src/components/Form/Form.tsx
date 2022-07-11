@@ -98,7 +98,9 @@ function Form({ countries }: FormProps) {
     }));
     switch (e.target.name) {
       case "name":
-        dispatch(setName(e.target.value));
+        if (e.target.value[e.target.value.length - 1] !== " ") {
+          dispatch(setName(e.target.value));
+        }
         break;
       case "surname":
         dispatch(setSurname(e.target.value));
