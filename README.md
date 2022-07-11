@@ -43,7 +43,7 @@ npm install
 npm start
 ```
 
-4. To enter the app, you must log in using the username and password that you configured on the backend app.
+4. To enter the app, you must log in using the username and password that you configured on the backend server.
 
 5. To run the test run `npm run test`. You'll get the coverage report both in the console and as an html file in `/coverage/lcov-report/index.html`
 
