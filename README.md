@@ -19,7 +19,7 @@ Application developed using **React** with **TypeScript**, **GraphQl** with **Ap
 
 ![loggin](/assets/logginvis.png)
 ![logginloading](/assets/logginloadingvis.png)
-![app](/assets/appvis.png)
+![mainview](/assets/mainview.png)
 
 ## How to use
 
