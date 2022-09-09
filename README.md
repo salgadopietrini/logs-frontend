@@ -1,4 +1,4 @@
-# mosano-frontend is a web app created using React, Apollo Client(GraphQL) and Redux, with TypeScript
+# logs-frontend is a web app created using React, Apollo Client(GraphQL) and Redux, with TypeScript
 
 Application developed using **React** with **TypeScript**, **GraphQl** with **Apollo Client**, **Redux ToolKit**, **MaterialUI** and **React Testing Library (Jest)**.
 
